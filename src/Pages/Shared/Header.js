@@ -21,14 +21,8 @@ const Header = () => {
     const listItems =
         <>
             <li><Link to={'/'}>Home</Link></li>
-            <li><Link to={'/'}>Services</Link></li>
-            {
-                user ?
-                    <>
-                        <li><Link to={'/'}>Add Services</Link></li>
-                    </> : ""
-            }
-            <li><Link to={'/'}>Blogs</Link></li>
+            <li><Link to={'/dashboard'}>Dashboard</Link></li>
+            <li><Link to={'/blogs'}>Blogs</Link></li>
         </>;
     return (
         <div>
@@ -51,7 +45,7 @@ const Header = () => {
                         <strong>CheapPhone</strong></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="menu menu-horizontal p-0">
+                    <ul className="menu menu-horizontal p-0 mx-2">
                         {listItems}
                     </ul>
                 </div>
