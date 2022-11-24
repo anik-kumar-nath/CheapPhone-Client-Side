@@ -1,3 +1,4 @@
+import { GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -6,7 +7,9 @@ import Loading from '../Pages/Shared/Loading';
 
 const Login = () => {
     const [waiting, setWaiting] = useState(false);
-    const { signIn } = useContext(AuthContext);
+    const { signIn, providerLogin } = useContext(AuthContext);
+    const GoogleProvider = new GoogleAuthProvider();
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -30,7 +33,20 @@ const Login = () => {
                 console.log(error.message)
                 toast.error(error.message)
             })
-
+    }
+    const handleGoogleLogin = () => {
+        setWaiting(true);
+        providerLogin(GoogleProvider)
+            .then(res => {
+                setWaiting(false);
+                toast.success('successfully login');
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                setWaiting(false);
+                console.log(error.message)
+                toast.error(error.message)
+            })
     }
     return (
         <div className='my-4'>
@@ -57,7 +73,7 @@ const Login = () => {
                     <p>Create Account, <Link to={'/signup'} className='text-green-500 font-bold'>Sign Up</Link></p>
                     <div className="divider">OR</div>
                     <div className="my-2">
-                        <button className="btn btn-outline btn-success w-full font-bold">Login With Gmail</button>
+                        <button className="btn btn-outline btn-success w-full font-bold" onClick={handleGoogleLogin}>Login With Gmail</button>
                     </div>
                 </div>
                 {
