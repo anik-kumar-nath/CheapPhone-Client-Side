@@ -24,10 +24,10 @@ const routes = createBrowserRouter([
                 path: '/category/:id',
                 element: <CategoryItems></CategoryItems>
             },
-            // {
-            //     path: '/login',
-            //     element: <Login></Login>
-            // },
+            {
+                path: '/login',
+                element: <Login></Login>
+            },
             {
                 path: '/signup',
                 element: <Signup></Signup>
