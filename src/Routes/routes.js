@@ -4,6 +4,7 @@ import Login from "../Login/Login";
 import Home from "../Pages/Home/Home";
 import Signup from "../Login/Signup";
 import CategoryItems from "../Pages/Home/Categories/CategoryItems";
+import ErrorRoute from "../Pages/ErrorRoute/ErrorRoute";
 
 const routes = createBrowserRouter([
     {
@@ -28,7 +29,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '*',
-                element: <p>none</p>
+                element: <ErrorRoute></ErrorRoute>
             }
         ]
     }
