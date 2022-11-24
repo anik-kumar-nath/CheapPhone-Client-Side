@@ -6,6 +6,8 @@ import Signup from "../Login/Signup";
 import CategoryItems from "../Pages/Home/Categories/CategoryItems";
 import ErrorRoute from "../Pages/ErrorRoute/ErrorRoute";
 import Blogs from "../Pages/Blogs/Blogs";
+import DashboardLayout from "../Layout/DashboardLayout";
+import Check from "../Dashboad/Check";
 
 const routes = createBrowserRouter([
     {
@@ -31,6 +33,20 @@ const routes = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup></Signup>
+            },
+            {
+                path: '/dashboard',
+                element: <DashboardLayout></DashboardLayout>,
+                children: [
+                    {
+                        path: '/dashboard',
+                        element: <Check></Check>
+                    },
+                    {
+                        path: '/dashboard/login',
+                        element: <Login></Login>
+                    }
+                ]
             },
             {
                 path: '*',

@@ -30,7 +30,7 @@ const Categories = () => {
             <h1 className='text-2xl md:text-3xl lg:text-4xl text-center font-bold'> List of Categories</h1>
             <div className='my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
                 {
-                    phoneCategories.map((phone) => <CategoryCard key={phone.id} phoneInformation={phone}></CategoryCard>)
+                    phoneCategories.map((phone, i) => <CategoryCard key={i} phoneInformation={phone}></CategoryCard>)
                 }
             </div>
         </div>
