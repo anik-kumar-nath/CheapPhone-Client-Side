@@ -1,8 +1,8 @@
 import React from 'react';
-import img1 from './../../Assets/Carousel/carousel (1).jpg';
-import img2 from './../../Assets/Carousel/carousel (2).jpg';
-import img3 from './../../Assets/Carousel/carousel (3).jpg';
-import img4 from './../../Assets/Carousel/carousel (4).jpg';
+import img1 from './../../../Assets/Carousel/carousel (1).jpg';
+import img2 from './../../../Assets/Carousel/carousel (2).jpg';
+import img3 from './../../../Assets/Carousel/carousel (3).jpg';
+import img4 from './../../../Assets/Carousel/carousel (4).jpg';
 import CarouselItem from './CarouselItem';
 
 const Carousel = () => {
