@@ -40,7 +40,6 @@ const AuthProvider = ({ children }) => {
 
         return () => unsubscribe();
     }, [])
-    !loading && console.log(user.displayName, user.email);
 
     const authInfo = {
         providerLogin,

@@ -14,6 +14,7 @@ import AllSellers from "../Dashboad/Admin/AllSellers/AllSellers";
 import AllBuyers from "../Dashboad/Admin/AllBuyers/AllBuyers";
 import ReportedItems from "../Dashboad/Admin/ReportedItems/ReportedItems";
 import Landing from "../Dashboad/Landing";
+import PrivateRoute from "./PrivateRoute";
 
 const routes = createBrowserRouter([
     {
@@ -42,7 +43,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/dashboard',
-                element: <DashboardLayout></DashboardLayout>,
+                element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
                 children: [
                     {
                         path: '/dashboard',

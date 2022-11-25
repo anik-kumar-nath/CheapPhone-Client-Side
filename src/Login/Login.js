@@ -37,7 +37,6 @@ const Login = () => {
         console.log(email, pass);
         signIn(email, pass)
             .then(res => {
-
                 setWaiting(false);
                 toast.success('successfully login');
                 e.target.reset();
@@ -58,7 +57,8 @@ const Login = () => {
                     handleLoginInformation({
                         name: res.user.displayName,
                         email: res.user.email,
-                        role: 'Buyer'
+                        role: 'Buyer',
+                        status: null
                     })
                 }
                 if (!details.isNewUser) {

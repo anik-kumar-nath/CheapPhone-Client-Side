@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
+import { AuthContext } from '../Contexts/AuthProvider';
 
 const DashboardLayout = () => {
-    // const role = 'Buyer';
-    const role = 'Seller'
-    // const role = 'Admin'
+
+    const { user, loading } = useContext(AuthContext);
+    const [role, setrole] = useState('');
+
+    if (!loading && user) {
+        fetch(`http://localhost:5000/userrole/?email=${user.email}`)
+            .then(res => res.json())
+            .then(data => setrole(data.role))
+    }
+
     return (
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

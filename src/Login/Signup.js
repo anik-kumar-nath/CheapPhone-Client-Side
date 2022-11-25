@@ -28,9 +28,10 @@ const Signup = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const role = e.target.role.value;
+        const status = null;
         createUser(email, password)
             .then(result => {
-                handleLoginInformation({ name, email, role })
+                handleLoginInformation({ name, email, role, status })
                 updateUser(name, imageURL);
                 e.target.reset();
                 navigate('/', { replace: true })
@@ -51,7 +52,7 @@ const Signup = () => {
                                 <label className="label">
                                     <span className="label-text">Name</span>
                                 </label>
-                                <input type="name" placeholder="name" name='name' className="input input-bordered" />
+                                <input type="name" placeholder="name" name='name' className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
