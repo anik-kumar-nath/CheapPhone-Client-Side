@@ -3,13 +3,13 @@ import { Link, Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
     // const role = 'Buyer';
-    // const role = 'Seller'
-    const role = 'Admin'
+    const role = 'Seller'
+    // const role = 'Admin'
     return (
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
             <div className="drawer-content ">
-                <div className='sticky top-0 flex flex-col items-end justify-start'>
+                <div className='sticky top-0 flex flex-col items-end justify-start z-50'>
                     <div className='flex justify-between lg:justify-center items-center w-full bg-gray-800 text-white'>
                         <h3 className='text-2xl font-bold px-2'>DashBoard</h3>
                         <label htmlFor="my-drawer-2" className="btn btn-outline btn-secondary drawer-button lg:hidden m-1">
