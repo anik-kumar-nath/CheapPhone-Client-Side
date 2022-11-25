@@ -3,7 +3,7 @@ import logo from './CheapPhone.png'
 
 const Footer = () => {
     return (
-        <footer className="footer footer-center p-10 bg-gray-300 text-black rounded">
+        <footer className="footer footer-center p-2 bg-gray-300 border-t-2 border-black text-black rounded">
             <div>
                 <div className="avatar">
                     <div className="w-20 rounded-full">

@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Check = () => {
+const AddProduct = () => {
     return (
         <div>
-            This is Check page.
+            AddProduct
         </div>
     );
 };
 
-export default Check;
+export default AddProduct;
