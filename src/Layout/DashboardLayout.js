@@ -2,9 +2,9 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
-    // const role = 'buyer';
-    // const role = 'seller'
-    const role = 'admin'
+    // const role = 'Buyer';
+    // const role = 'Seller'
+    const role = 'Admin'
     return (
         <div className="drawer drawer-mobile">
             <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
@@ -27,24 +27,24 @@ const DashboardLayout = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 bg-slate-200">
                     {
-                        role === 'buyer' &&
+                        role === 'Buyer' &&
                         <>
-                            <li className='my-2 btn btn-outline btn-primary rounded-lg'><Link to={'/dashboard/myorders'}>My Orders</Link></li>
+                            <li><Link className='my-2 btn btn-outline btn-primary rounded-lg w-full' to={'/dashboard/myorders'}>My Orders</Link></li>
                         </>
                     }
                     {
-                        role === 'seller' &&
+                        role === 'Seller' &&
                         <>
-                            <li className='my-2 btn btn-outline btn-primary rounded-lg'><Link to={'/dashboard/addproducts'}>Add A Products</Link></li>
-                            <li className='my-2 btn btn-outline btn-primary rounded-lg'><Link to={'/dashboard/myproducts'}>My Products</Link></li>
+                            <li><Link className='my-2 btn btn-outline btn-primary rounded-lg w-full' to={'/dashboard/addproducts'}>Add A Products</Link></li>
+                            <li><Link className='my-2 btn btn-outline btn-primary rounded-lg w-full' to={'/dashboard/myproducts'}>My Products</Link></li>
                         </>
                     }
                     {
-                        role === 'admin' &&
+                        role === 'Admin' &&
                         <>
-                            <li className='my-2 btn btn-outline btn-primary rounded-lg'><Link to={'/dashboard/allsellers'}>All Sellers</Link></li>
-                            <li className='my-2 btn btn-outline btn-primary rounded-lg'><Link to={'/dashboard/allbuyers'}>All Buyers</Link></li>
-                            <li className='my-2 btn btn-outline btn-primary rounded-lg'><Link to={'/dashboard/reporteditems'}>Reported Items</Link></li>
+                            <li ><Link to={'/dashboard/allsellers'} className='my-2 btn btn-outline btn-primary rounded-lg w-full'>All Sellers</Link></li>
+                            <li><Link className='my-2 btn btn-outline btn-primary rounded-lg w-full' to={'/dashboard/allbuyers'}>All Buyers</Link></li>
+                            <li><Link className='my-2 btn btn-outline btn-primary rounded-lg w-full' to={'/dashboard/reporteditems'}>Reported Items</Link></li>
                         </>
                     }
                 </ul>

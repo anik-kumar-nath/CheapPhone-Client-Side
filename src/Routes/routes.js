@@ -7,13 +7,13 @@ import CategoryItems from "../Pages/Home/Categories/CategoryItems";
 import ErrorRoute from "../Pages/ErrorRoute/ErrorRoute";
 import Blogs from "../Pages/Blogs/Blogs";
 import DashboardLayout from "../Layout/DashboardLayout";
-import Check from "../Dashboad/Check";
 import MyOrders from "../Dashboad/Buyer/MyOrders/MyOrders";
 import AddProduct from "../Dashboad/Seller/AddProduct/AddProduct";
 import MyProducts from "../Dashboad/Seller/MyProducts/MyProducts";
 import AllSellers from "../Dashboad/Admin/AllSellers/AllSellers";
 import AllBuyers from "../Dashboad/Admin/AllBuyers/AllBuyers";
 import ReportedItems from "../Dashboad/Admin/ReportedItems/ReportedItems";
+import Landing from "../Dashboad/Landing";
 
 const routes = createBrowserRouter([
     {
@@ -46,7 +46,7 @@ const routes = createBrowserRouter([
                 children: [
                     {
                         path: '/dashboard',
-                        element: <Check></Check>
+                        element: <Landing></Landing>
                     },
                     {
                         path: '/dashboard/myorders',

@@ -1,11 +1,25 @@
-import { GoogleAuthProvider } from 'firebase/auth';
+import { getAdditionalUserInfo, GoogleAuthProvider } from 'firebase/auth';
 import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 import Loading from '../Pages/Shared/Loading';
+import axios from "axios";
 
 const Login = () => {
+
+    const handleLoginInformation = (newUser) => {
+        axios.post('http://localhost:5000/newuser', {
+            userInformation: newUser
+        })
+            .then((response) => {
+                if (response.statusText === "OK") {
+                    setWaiting(false);
+                    toast.success('successfully login');
+                }
+            });
+    }
+
     const [waiting, setWaiting] = useState(false);
     const { signIn, providerLogin } = useContext(AuthContext);
     const GoogleProvider = new GoogleAuthProvider();
@@ -23,6 +37,7 @@ const Login = () => {
         console.log(email, pass);
         signIn(email, pass)
             .then(res => {
+
                 setWaiting(false);
                 toast.success('successfully login');
                 e.target.reset();
@@ -38,8 +53,19 @@ const Login = () => {
         setWaiting(true);
         providerLogin(GoogleProvider)
             .then(res => {
-                setWaiting(false);
-                toast.success('successfully login');
+                const details = getAdditionalUserInfo(res);
+                if (details.isNewUser) {
+                    handleLoginInformation({
+                        name: res.user.displayName,
+                        email: res.user.email,
+                        role: 'Buyer'
+                    })
+                }
+                if (!details.isNewUser) {
+                    setWaiting(false);
+                    toast.success('successfully login');
+                }
+
                 navigate(from, { replace: true });
             })
             .catch(error => {

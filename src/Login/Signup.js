@@ -3,8 +3,20 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
 import Loading from '../Pages/Shared/Loading';
+import axios from "axios";
 
 const Signup = () => {
+    const handleLoginInformation = (newUser) => {
+        axios.post('http://localhost:5000/newuser', {
+            userInformation: newUser
+        })
+            .then((response) => {
+                if (response.statusText === "OK") {
+                    setWaiting(false);
+                    toast.success('successfully Create Account');
+                }
+            });
+    }
     const [waiting, setWaiting] = useState(false);
     const { createUser, updateUser } = useContext(AuthContext);
     const navigate = useNavigate();
@@ -16,16 +28,10 @@ const Signup = () => {
         const email = e.target.email.value;
         const password = e.target.password.value;
         const role = e.target.role.value;
-
-
-        console.log(name, email, role)
-
-
         createUser(email, password)
             .then(result => {
+                handleLoginInformation({ name, email, role })
                 updateUser(name, imageURL);
-                setWaiting(false);
-                toast.success('successfully Create Account')
                 e.target.reset();
                 navigate('/', { replace: true })
             })
