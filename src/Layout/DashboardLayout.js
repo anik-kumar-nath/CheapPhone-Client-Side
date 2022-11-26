@@ -1,16 +1,24 @@
 import React, { useContext, useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AuthContext } from '../Contexts/AuthProvider';
+import Loading from '../Pages/Shared/Loading';
 
 const DashboardLayout = () => {
-
+    const [waiting, setWaiting] = useState(true);
     const { user, loading } = useContext(AuthContext);
-    const [role, setrole] = useState('');
+    const [role, setRole] = useState('');
 
     if (!loading && user) {
         fetch(`http://localhost:5000/userrole/?email=${user.email}`)
             .then(res => res.json())
-            .then(data => setrole(data.role))
+            .then(data => {
+                setWaiting(false);
+                setRole(data.role)
+            })
+            .catch(e => setWaiting(false))
+    }
+    if (waiting) {
+        return <Loading></Loading>
     }
 
     return (

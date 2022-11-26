@@ -4,11 +4,13 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Contexts/AuthProvider';
 
 const Header = () => {
-    const { user, logOut } = useContext(AuthContext);
+    const { user, logOut, setCurrentEamil } = useContext(AuthContext);
 
     const handleLogOut = () => {
         return logOut()
-            .then(res => { })
+            .then(res => {
+                setCurrentEamil('');
+            })
             .catch(e => console.log(e));
     }
 

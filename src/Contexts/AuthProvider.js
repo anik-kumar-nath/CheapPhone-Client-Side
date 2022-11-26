@@ -40,7 +40,7 @@ const AuthProvider = ({ children }) => {
 
         return () => unsubscribe();
     }, [])
-
+    const [currentEamil, setCurrentEamil] = useState('');
     const authInfo = {
         providerLogin,
         createUser,
@@ -48,7 +48,9 @@ const AuthProvider = ({ children }) => {
         updateUser,
         logOut,
         user,
-        loading
+        loading,
+        currentEamil,
+        setCurrentEamil
     }
     return (
         <AuthContext.Provider value={authInfo}>

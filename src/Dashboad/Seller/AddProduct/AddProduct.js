@@ -5,8 +5,7 @@ import toast from 'react-hot-toast';
 const AddProduct = () => {
     const [waiting, setWaiting] = useState(false);
     const { user, loading } = useContext(AuthContext)
-    const [photo, setPhoto] = useState('');
-    const [product, setProduct] = useState({});
+    const [photo, setPhoto] = useState();
     const handleAddProduct = (e) => {
         setWaiting(true);
         e.preventDefault();
@@ -22,30 +21,29 @@ const AddProduct = () => {
         const formData = new FormData();
         formData.append('image', photo);
         const url = `https://api.imgbb.com/1/upload?key=81a80008d4071cd447ec4b584a7795f1`
-        fetch(url, {
+        photo && fetch(url, {
             method: 'POST',
             body: formData
         })
             .then(res => res.json())
             .then(imgData => {
                 if (imgData.success) {
-                    // console.log(imgData.data.url);
                     const productImage = imgData.data.url;
                     if (!loading) {
                         const sellerName = user.displayName;
                         const sellerEmail = user.email;
-                        setProduct({ sellerName, sellerEmail, productName, productCategory, originalPrice, resalePrice, yearUse, condition, productImage, mobile, location, description });
+                        const productStatus = 'Available';
+
                         fetch('http://localhost:5000/addproduct', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
                             },
-                            body: JSON.stringify(product)
+                            body: JSON.stringify({ sellerName, sellerEmail, productName, productStatus, productCategory, originalPrice, resalePrice, yearUse, condition, productImage, mobile, location, description })
                         })
                             .then(res => res.json())
                             .then(data => {
                                 if (data.acknowledged) {
-                                    console.log(product)
                                     setWaiting(false);
                                     toast.success("Product added Successfully")
                                 }
