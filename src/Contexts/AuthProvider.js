@@ -20,8 +20,10 @@ const AuthProvider = ({ children }) => {
         return signInWithEmailAndPassword(auth, email, password);
     }
 
-    const updateUser = (userInfo) => {
-        return updateProfile(auth.currentUser, userInfo);
+    const updateUser = (name, image) => {
+        return updateProfile(auth.currentUser, {
+            displayName: name, photoURL: image
+        });
     }
     const providerLogin = (provider) => {
         return signInWithPopup(auth, provider);

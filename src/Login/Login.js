@@ -34,7 +34,6 @@ const Login = () => {
         setWaiting(true);
         const email = e.target.email.value;
         const pass = e.target.pass.value;
-        console.log(email, pass);
         signIn(email, pass)
             .then(res => {
                 setWaiting(false);

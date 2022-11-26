@@ -31,6 +31,7 @@ const routes = createBrowserRouter([
             },
             {
                 path: '/category/:id',
+                loader: ({ params }) => params.id,
                 element: <CategoryItems></CategoryItems>
             },
             {

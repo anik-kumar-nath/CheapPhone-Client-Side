@@ -13,6 +13,7 @@ const Signup = () => {
             .then((response) => {
                 if (response.statusText === "OK") {
                     setWaiting(false);
+                    navigate('/', { replace: true })
                     toast.success('successfully Create Account');
                 }
             });
@@ -23,7 +24,7 @@ const Signup = () => {
     const handleSignup = (e) => {
         e.preventDefault();
         setWaiting(true);
-        const name = e.target.name.value || 'Anonymous';
+        const name = e.target.name.value;
         const imageURL = 'https://www.freeiconspng.com/uploads/no-image-icon-0.png';
         const email = e.target.email.value;
         const password = e.target.password.value;
@@ -31,10 +32,12 @@ const Signup = () => {
         const status = null;
         createUser(email, password)
             .then(result => {
-                handleLoginInformation({ name, email, role, status })
-                updateUser(name, imageURL);
-                e.target.reset();
-                navigate('/', { replace: true })
+                updateUser(name, imageURL)
+                    .then(() => {
+                        handleLoginInformation({ name, email, role, status })
+                        e.target.reset();
+                    })
+                    .catch(err => console(err));
             })
             .catch(error => {
                 console.error(error)
