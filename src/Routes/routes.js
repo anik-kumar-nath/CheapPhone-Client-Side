@@ -20,6 +20,7 @@ const routes = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement: <ErrorRoute></ErrorRoute>,
         children: [
             {
                 path: '/',
@@ -32,7 +33,8 @@ const routes = createBrowserRouter([
             {
                 path: '/category/:id',
                 loader: ({ params }) => params.id,
-                element: <CategoryItems></CategoryItems>
+                element: <CategoryItems></CategoryItems>,
+                errorElement: <ErrorRoute></ErrorRoute>,
             },
             {
                 path: '/login',

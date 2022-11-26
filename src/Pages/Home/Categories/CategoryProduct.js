@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { TiTickOutline } from 'react-icons/ti'
-const CategoryProduct = ({ product }) => {
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider';
+const CategoryProduct = ({ product, handleBooked }) => {
+    const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
     const [status, setStatus] = useState(null)
-    const { _id, sellerEmail, productImage, productName, originalPrice, resalePrice, yearUse, condition, addingDate, description, sellerName, } = product;
+    const { _id, sellerEmail, productImage, productName, originalPrice, resalePrice, yearUse, condition, location, addingDate, description, sellerName, mobile } = product;
     fetch(`http://localhost:5000/sellerstatus?email=${sellerEmail}`)
         .then(res => res.json())
         .then(data => setStatus(data.status))
@@ -21,6 +25,10 @@ const CategoryProduct = ({ product }) => {
                         <span>{yearUse},</span>
                         <strong>Condition:</strong>
                         <span>{condition},</span>
+                        <strong>Location:</strong>
+                        <span>{location},</span>
+                        <strong>Seller Mobile:</strong>
+                        <span>{mobile},</span>
                         <strong>Date:</strong>
                         <span>{addingDate}</span>
                     </div>
@@ -33,7 +41,7 @@ const CategoryProduct = ({ product }) => {
                         <strong className='text-lg text-green-800'>{status === 'Verified' && <TiTickOutline />}</strong>
                     </div>
                     <div className='flex flex-wrap gap-1 justify-around'>
-                        <button className='btn btn-primary'>Book Now</button>
+                        <label htmlFor="my-modal-3" className="btn" onClick={() => { user ? handleBooked(user.displayName, user.email, _id, productImage, productName, resalePrice, location, mobile) : navigate('/login', { replace: true }) }}>Book Now</label>
                         <button className='btn btn-error'>Report to Admin</button>
                     </div>
                 </div>
