@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import { TiTickOutline } from 'react-icons/ti'
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider';
-const CategoryProduct = ({ product, handleBooked }) => {
+const CategoryProduct = ({ product, handleBooked, handleReportItem }) => {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const [status, setStatus] = useState(null)
@@ -42,7 +42,7 @@ const CategoryProduct = ({ product, handleBooked }) => {
                     </div>
                     <div className='flex flex-wrap gap-1 justify-around'>
                         <label htmlFor="my-modal-3" className="btn" onClick={() => { user ? handleBooked(user.displayName, user.email, _id, productImage, productName, resalePrice, location, mobile) : navigate('/login', { replace: true }) }}>Book Now</label>
-                        <button className='btn btn-error'>Report to Admin</button>
+                        <button className='btn btn-error' onClick={() => { user ? handleReportItem(user.displayName, user.email, _id, productImage, productName) : navigate('/login', { replace: true }) }}>Report to Admin</button>
                     </div>
                 </div>
             </div>
