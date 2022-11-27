@@ -13,8 +13,21 @@ const AllSellers = () => {
         }
     });
 
-    const handleUpdateStatus = (id) => {
-
+    const handleUpdateStatus = (id, verificationText) => {
+        fetch(`http://localhost:5000/seller/${id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ verificationText })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.matchedCount > 0) {
+                    toast.success('Seller Verified successfully.')
+                    refetch();
+                }
+            })
     }
     const handleDeleteSeller = (id) => {
         fetch(`http://localhost:5000/seller/${id}`, {
@@ -23,7 +36,7 @@ const AllSellers = () => {
             .then(res => res.json())
             .then(data => {
                 if (data.deletedCount > 0) {
-                    toast.success('Delete successfully.')
+                    toast.success('Seller Delete successfully.')
                     refetch();
                 }
             })
@@ -35,6 +48,7 @@ const AllSellers = () => {
     return (
         <div>
             <div>
+                <h1 className='text-2xl md:text-3xl lg:text-4xl text-center font-bold bg-red-100 p-2'> All Sellers Information</h1>
                 <div className="overflow-x-auto">
                     <table className="table w-full">
                         <thead>
@@ -49,12 +63,18 @@ const AllSellers = () => {
                         <tbody>
                             {
                                 sellers.map((seller, index) =>
-                                    <tr className="hover">
+                                    <tr className="hover" key={index}>
                                         <th>{index + 1}</th>
                                         <td>{seller.name}
                                         </td>
                                         <td>{seller.email}</td>
-                                        <td>{seller.status}</td>
+                                        <td>
+                                            {
+                                                seller.status === 'Verified' ?
+                                                    <strong className='p-1 text-green-900'>{seller.status}</strong>
+                                                    : <button className='btn btn-warning btn-sm' onClick={() => handleUpdateStatus(seller._id, 'Verified')}>Verify</button>
+                                            }
+                                        </td>
                                         <td>
                                             <button className='btn btn-error btn-sm' onClick={() => handleDeleteSeller(seller._id)}>Delete</button>
                                         </td>

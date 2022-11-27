@@ -24,21 +24,7 @@ const MyProducts = () => {
     if (!loading) {
         refetch();
     }
-    // const handleProductDelete = id => {
-    //     fetch(`http://localhost:5000/myproducts/${id}`, {
-    //         method: 'PUT', 
-    //         // headers: {
-    //         //     authorization: `bearer ${localStorage.getItem('accessToken')}`
-    //         // }
-    //     })
-    //     .then(res => res.json())
-    //     .then(data => {
-    //         if(data.modifiedCount > 0){
-    //             toast.success('Make admin successful.')
-    //             refetch();
-    //         }
-    //     })
-    // }
+
     const handleProductDelete = id => {
         fetch(`http://localhost:5000/myproducts/${id}`, {
             method: 'DELETE'
