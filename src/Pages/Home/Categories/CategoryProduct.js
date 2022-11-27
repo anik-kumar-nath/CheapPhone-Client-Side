@@ -1,9 +1,12 @@
 import React, { useContext, useState } from 'react';
-import { TiTickOutline } from 'react-icons/ti'
-import { useNavigate } from 'react-router-dom';
+import toast from 'react-hot-toast';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider';
+import tikMark from './verified.svg';
+
 const CategoryProduct = ({ product, handleBooked, handleReportItem }) => {
     const navigate = useNavigate();
+    const pathLocation = useLocation();
     const { user } = useContext(AuthContext);
     const [status, setStatus] = useState(null)
     const { _id, sellerEmail, productImage, productName, originalPrice, resalePrice, yearUse, condition, location, addingDate, description, sellerName, mobile } = product;
@@ -36,13 +39,13 @@ const CategoryProduct = ({ product, handleBooked, handleReportItem }) => {
                         <strong>Description:</strong>
                         <span title={description}>{description}</span>
                     </p>
-                    <div className='bg-amber-100 p-1 flex'>
-                        <p className='text-red-800'>Seller: {sellerName}</p>
-                        <strong className='text-lg text-green-800'>{status === 'Verified' && <TiTickOutline />}</strong>
+                    <div className='bg-gray-100 shadow-lg p-1 rounded-lg flex justify-end mb-1'>
+                        <span className='text-red-800 text-lg font-bold'>{sellerName}</span>
+                        {status === 'Verified' && <img src={tikMark} alt="" />}
                     </div>
-                    <div className='flex flex-wrap gap-1 justify-around'>
-                        <label htmlFor="my-modal-3" className="btn" onClick={() => { user ? handleBooked(user.displayName, user.email, _id, productImage, productName, resalePrice, location, mobile) : navigate('/login', { replace: true }) }}>Book Now</label>
-                        <button className='btn btn-error' onClick={() => { user ? handleReportItem(user.displayName, user.email, _id, productImage, productName) : navigate('/login', { replace: true }) }}>Report to Admin</button>
+                    <div className='flex flex-wrap gap-1 justify-around' state={{ from: pathLocation }}>
+                        <label htmlFor="my-modal-3" className="btn" onClick={() => { user ? handleBooked(user.displayName, user.email, _id, productImage, productName, resalePrice, location, mobile) : toast.error("To Booked Product you must Login") && navigate('/login', { replace: true }) }}>Book Now</label>
+                        <button className='btn btn-error' onClick={() => { user ? handleReportItem(user.displayName, user.email, _id, productImage, productName) : toast.error("To Report Product you must Login") && navigate('/login', { replace: true }) }}>Report to Admin</button>
                     </div>
                 </div>
             </div>

@@ -10,7 +10,7 @@ const CategoryCard = ({ phoneInformation }) => {
                 <div className="card-body">
                     <h2 className="card-title text-center font-bold">{phoneType}</h2>
                     <p>{description}</p>
-                    <Link to={`/category/${categoryId}`} className="btn btn-primary w-full">Show Products</Link>
+                    <Link to={`/category/${categoryId}`} className="btn btn-primary w-full">See Products</Link>
                 </div>
             </div>
         </div>

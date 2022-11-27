@@ -1,38 +1,33 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import CategoryCard from './CategoryCard';
-import phone1 from './../../../Assets/PhoneTypes/buttonPhone.jpg'
-import phone2 from './../../../Assets/PhoneTypes/androidPhone.png'
-import phone3 from './../../../Assets/PhoneTypes/iphone.jpg'
+import Loading from '../../Shared/Loading';
 
 const Categories = () => {
-    const phoneCategories = [
-        {
-            categoryId: 1,
-            phoneType: 'Button Phone',
-            description: '',
-            phoneImage: phone1
-        },
-        {
-            categoryId: 2,
-            phoneType: 'Android Phone',
-            description: '',
-            phoneImage: phone2
-        },
-        {
-            categoryId: 3,
-            phoneType: 'Apple Phone',
-            description: '',
-            phoneImage: phone3
+    const { data: phoneCategory = [], isLoading } = useQuery({
+        queryKey: ['phonecategory'],
+        queryFn: async () => {
+            const res = await fetch(`http://localhost:5000/phonecategory`);
+            const data = await res.json();
+            return data;
         }
-    ]
+    });
+
     return (
         <div className='p-4'>
             <h1 className='text-2xl md:text-3xl lg:text-4xl text-center font-bold'> List of Categories</h1>
-            <div className='my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
-                {
-                    phoneCategories.map((phone, i) => <CategoryCard key={i} phoneInformation={phone}></CategoryCard>)
-                }
-            </div>
+            {
+                isLoading ?
+                    <div className='flex justify-center items-center'>
+                        <Loading></Loading>
+                    </div>
+                    :
+                    <div className='my-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2'>
+                        {
+                            phoneCategory && phoneCategory.map((phone) => <CategoryCard key={phone._id} phoneInformation={phone}></CategoryCard>)
+                        }
+                    </div>
+            }
         </div>
     );
 };
