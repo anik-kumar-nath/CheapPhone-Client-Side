@@ -15,6 +15,7 @@ import AllBuyers from "../Dashboad/Admin/AllBuyers/AllBuyers";
 import ReportedItems from "../Dashboad/Admin/ReportedItems/ReportedItems";
 import Landing from "../Dashboad/Landing";
 import PrivateRoute from "./PrivateRoute";
+import Payment from "../Dashboad/Payment/Payment";
 
 
 const routes = createBrowserRouter([
@@ -77,11 +78,11 @@ const routes = createBrowserRouter([
                         path: '/dashboard/reporteditems',
                         element: <ReportedItems></ReportedItems>
                     },
-                    // {
-                    // path: '/dashboard/payment/:id',
-                    // element: <Payment></Payment>,
-                    // loader: ({params}) => fetch(`https://assignment-12-server-aknathweb.vercel.app/bookings/${params.id}`)
-                    // }
+                    {
+                        path: '/dashboard/payment/:id',
+                        element: <Payment></Payment>,
+                        loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`)
+                    }
                 ]
             },
             {
