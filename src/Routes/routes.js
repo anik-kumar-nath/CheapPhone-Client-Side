@@ -75,7 +75,12 @@ const routes = createBrowserRouter([
                     {
                         path: '/dashboard/reporteditems',
                         element: <ReportedItems></ReportedItems>
-                    }
+                    },
+                    // {
+                    // path: '/dashboard/payment/:id',
+                    // element: <Payment></Payment>,
+                    // loader: ({params}) => fetch(`http://localhost:5000/bookings/${params.id}`)
+                    // }
                 ]
             },
             {
