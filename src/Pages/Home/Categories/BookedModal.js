@@ -8,7 +8,7 @@ const BookedModal = ({ Booked, refetch }) => {
         const buyerNumber = e.target.buyerNumber.value;
         const meetLocation = e.target.meetLocation.value;
         const BookedInformation = { buyerNumber, meetLocation, buyerName, buyerEmail, productId, productImage, productName, price, sellerLocation, sellerMobile }
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://assignment-12-server-aknathweb.vercel.app/bookings', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

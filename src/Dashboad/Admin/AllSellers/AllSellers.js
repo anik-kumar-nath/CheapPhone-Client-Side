@@ -7,14 +7,14 @@ const AllSellers = () => {
     const { data: sellers, isLoading, refetch } = useQuery({
         queryKey: ['allseller'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/allseller`);
+            const res = await fetch(`https://assignment-12-server-aknathweb.vercel.app/allseller`);
             const data = await res.json();
             return data;
         }
     });
 
     const handleUpdateStatus = (id, verificationText) => {
-        fetch(`http://localhost:5000/seller/${id}`, {
+        fetch(`https://assignment-12-server-aknathweb.vercel.app/seller/${id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'
@@ -30,7 +30,7 @@ const AllSellers = () => {
             })
     }
     const handleDeleteSeller = (id) => {
-        fetch(`http://localhost:5000/seller/${id}`, {
+        fetch(`https://assignment-12-server-aknathweb.vercel.app/seller/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

@@ -8,7 +8,7 @@ const MyOrders = () => {
     const { data: myorders, isLoading } = useQuery({
         queryKey: ['myorder'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myorder?email=${user.email}`);
+            const res = await fetch(`https://assignment-12-server-aknathweb.vercel.app/myorder?email=${user.email}`);
             const data = await res.json();
             return data;
         }

@@ -7,7 +7,7 @@ import axios from "axios";
 
 const Signup = () => {
     const handleLoginInformation = (newUser) => {
-        axios.post('http://localhost:5000/newuser', {
+        axios.post('https://assignment-12-server-aknathweb.vercel.app/newuser', {
             userInformation: newUser
         })
             .then((response) => {

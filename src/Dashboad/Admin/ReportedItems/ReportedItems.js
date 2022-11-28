@@ -7,14 +7,14 @@ const ReportedItems = () => {
     const { data: reports, isLoading, refetch } = useQuery({
         queryKey: ['report'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/report`);
+            const res = await fetch(`https://assignment-12-server-aknathweb.vercel.app/report`);
             const data = await res.json();
             return data;
         }
     });
 
     const handleDeleteProduct = (productId) => {
-        fetch(`http://localhost:5000/report/${productId}`, {
+        fetch(`https://assignment-12-server-aknathweb.vercel.app/report/${productId}`, {
             method: 'DELETE'
         })
             .then(res => res.json())

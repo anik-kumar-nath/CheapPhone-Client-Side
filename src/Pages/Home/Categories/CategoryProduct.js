@@ -10,7 +10,7 @@ const CategoryProduct = ({ product, handleBooked, handleReportItem }) => {
     const { user } = useContext(AuthContext);
     const [status, setStatus] = useState(null)
     const { _id, sellerEmail, productImage, productName, originalPrice, resalePrice, yearUse, condition, location, addingDate, description, sellerName, mobile } = product;
-    fetch(`http://localhost:5000/sellerstatus?email=${sellerEmail}`)
+    fetch(`https://assignment-12-server-aknathweb.vercel.app/sellerstatus?email=${sellerEmail}`)
         .then(res => res.json())
         .then(data => setStatus(data.status))
     return (

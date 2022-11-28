@@ -9,7 +9,7 @@ const DashboardLayout = () => {
     const [role, setRole] = useState('');
 
     if (!loading && user) {
-        fetch(`http://localhost:5000/userrole/?email=${user.email}`)
+        fetch(`https://assignment-12-server-aknathweb.vercel.app/userrole/?email=${user.email}`)
             .then(res => res.json())
             .then(data => {
                 setWaiting(false);
@@ -41,7 +41,7 @@ const DashboardLayout = () => {
             </div>
             <div className="drawer-side">
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
-                <ul className="menu p-4 w-80 bg-slate-200">
+                <ul className="menu p-4 w-fit md:w-80  bg-slate-200">
                     {
                         role === 'Buyer' &&
                         <>

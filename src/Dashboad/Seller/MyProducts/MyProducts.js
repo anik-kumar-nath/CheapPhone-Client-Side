@@ -11,7 +11,7 @@ const MyProducts = () => {
     const { data: products, isLoading, refetch } = useQuery({
         queryKey: ['myproducts'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/myproducts?email=${user.email}`);
+            const res = await fetch(`https://assignment-12-server-aknathweb.vercel.app/myproducts?email=${user.email}`);
             const data = await res.json();
             return data;
         }
@@ -26,7 +26,7 @@ const MyProducts = () => {
     }
 
     const handleProductDelete = id => {
-        fetch(`http://localhost:5000/myproducts/${id}`, {
+        fetch(`https://assignment-12-server-aknathweb.vercel.app/myproducts/${id}`, {
             method: 'DELETE'
         })
             .then(res => res.json())
@@ -37,13 +37,28 @@ const MyProducts = () => {
                 }
             })
     }
+    const handleAdvertise = (productId, productImage, productName, originalPrice, resalePrice, yearUse, addingDate) => {
+        fetch('https://assignment-12-server-aknathweb.vercel.app/addadvertise', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify({ productId, productImage, productName, originalPrice, resalePrice, yearUse, addingDate })
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.acknowledged) {
+                    toast.success("Advertise Product Successfully")
+                }
+            })
+    }
 
     return (
         <div className='p-4'>
             <h1 className='text-2xl md:text-3xl lg:text-4xl text-center font-bold'> List of Categories</h1>
             <div className='my-4 grid grid-cols-1 md:grid-cols-2 gap-2'>
                 {
-                    products && products.map((product) => <MyProductCard key={product._id} handleProductDelete={handleProductDelete} product={product}></MyProductCard>)
+                    products && products.map((product) => <MyProductCard key={product._id} handleProductDelete={handleProductDelete} handleAdvertise={handleAdvertise} product={product}></MyProductCard>)
                 }
             </div>
         </div>

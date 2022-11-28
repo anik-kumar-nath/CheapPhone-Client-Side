@@ -1,7 +1,6 @@
 import React from 'react';
 
-const MyProductCard = ({ product, handleProductDelete }) => {
-    // const {product name,status (available/sold),advertise(if available),original price,resale price, delete}=product
+const MyProductCard = ({ product, handleProductDelete, handleAdvertise }) => {
     const { _id, productImage, productName, originalPrice, resalePrice, yearUse, condition, addingDate, description, productStatus } = product;
     return (
         <div>
@@ -30,7 +29,7 @@ const MyProductCard = ({ product, handleProductDelete }) => {
                     </p>
                     <div className='flex gap-2 justify-around'>
                         <button className='btn btn-outline btn-warning' onClick={() => handleProductDelete(_id)}>Delete</button>
-                        {(productStatus === 'Available') ? <button className='btn btn-outline btn-warning'>Advertise</button> : ''}
+                        {(productStatus === 'Available') ? <button className='btn btn-outline btn-warning' onClick={() => handleAdvertise(_id, productImage, productName, originalPrice, resalePrice, yearUse, addingDate)}>Advertise</button> : ''}
                     </div>
                 </div>
             </div>

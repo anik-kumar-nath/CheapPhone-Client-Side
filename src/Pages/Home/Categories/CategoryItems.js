@@ -12,7 +12,7 @@ const CategoryItems = () => {
     const { data: categoryPhone } = useQuery({
         queryKey: [11111],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/category/${category}`);
+            const res = await fetch(`https://assignment-12-server-aknathweb.vercel.app/category/${category}`);
             const data = await res.json();
             return data;
         }
@@ -22,7 +22,7 @@ const CategoryItems = () => {
     const { data: categoryProducts, isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await fetch(`http://localhost:5000/products/${category}`);
+            const res = await fetch(`https://assignment-12-server-aknathweb.vercel.app/products/${category}`);
             const data = await res.json();
             return data;
         }
@@ -34,7 +34,7 @@ const CategoryItems = () => {
         setBookedInfo({ buyerName, buyerEmail, productId, productImage, productName, price, sellerLocation, sellerMobile });
     }
     const handleReportItem = (reporterName, reporterEmail, productId, productImage, productName) => {
-        fetch('http://localhost:5000/addreport', {
+        fetch('https://assignment-12-server-aknathweb.vercel.app/addreport', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

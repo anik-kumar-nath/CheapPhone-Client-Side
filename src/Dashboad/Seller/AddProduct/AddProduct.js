@@ -34,7 +34,7 @@ const AddProduct = () => {
                         const sellerEmail = user.email;
                         const productStatus = 'Available';
 
-                        fetch('http://localhost:5000/addproduct', {
+                        fetch('https://assignment-12-server-aknathweb.vercel.app/addproduct', {
                             method: 'POST',
                             headers: {
                                 'content-type': 'application/json'
@@ -53,16 +53,12 @@ const AddProduct = () => {
                 }
             })
     }
-    if (waiting) {
-        return <Loading></Loading>
-    }
-
     return (
         <div className='my-4'>
             <h1 className='text-2xl md:text-3xl lg:text-4xl text-center font-bold my-4'>Add A Product </h1>
             <form onSubmit={handleAddProduct}>
                 <div className="hero mx-auto">
-                    <div className="card flex-shrink-0 min-w-fit w-96 shadow-2xl bg-base-100">
+                    <div className="card flex-shrink-0 min-w-fit w-96 shadow-2xl bg-base-100 relative">
                         <div className="card-body">
                             <div className="form-control">
                                 <label className="label">
@@ -84,11 +80,11 @@ const AddProduct = () => {
                                 <label className="label">
                                     <span className="label-text">Original Price</span>
                                 </label>
-                                <input type="number" placeholder="Original Price" name='originalPrice' className="input input-bordered" required />
+                                <input type="number" min={1} placeholder="Original Price" name='originalPrice' className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
-                                    <span className="label-text">Resale Price</span>
+                                    <span min={1} className="label-text">Resale Price</span>
                                 </label>
                                 <input type="number" placeholder="Resale Price" name='resalePrice' className="input input-bordered" required />
                             </div>
@@ -96,7 +92,7 @@ const AddProduct = () => {
                                 <label className="label">
                                     <span className="label-text">Year of Use</span>
                                 </label>
-                                <input type="number" placeholder="Year of Use" name='yearUse' className="input input-bordered" required />
+                                <input type="number" min={0} placeholder="Year of Use" name='yearUse' className="input input-bordered" required />
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -125,7 +121,15 @@ const AddProduct = () => {
                                 <label className="label">
                                     <span className="label-text">Location</span>
                                 </label>
-                                <input type="text" placeholder="Location" name='location' className="input input-bordered" required />
+                                <select className="select select-accent w-full max-w-xs" name='location'>
+                                    <option>Dhaka</option>
+                                    <option>Chittagong</option>
+                                    <option>Khulna</option>
+                                    <option>Barisal</option>
+                                    <option>Rajshahi</option>
+                                    <option>Rangpur</option>
+                                    <option>Sylhet</option>
+                                </select>
                             </div>
                             <div className="form-control">
                                 <label className="label">
@@ -135,6 +139,12 @@ const AddProduct = () => {
                             </div>
                             <input type="submit" className='btn btn-outline btn-success' value="Submit" />
                         </div>
+                        {
+                            waiting &&
+                            <div className='absolute h-full w-full flex align-middle justify-center bg-gray-200/40'>
+                                <Loading></Loading>
+                            </div>
+                        }
                     </div>
                 </div>
             </form>
