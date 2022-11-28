@@ -16,6 +16,7 @@ import ReportedItems from "../Dashboad/Admin/ReportedItems/ReportedItems";
 import Landing from "../Dashboad/Landing";
 import PrivateRoute from "./PrivateRoute";
 
+
 const routes = createBrowserRouter([
     {
         path: '/',
@@ -88,6 +89,10 @@ const routes = createBrowserRouter([
                 element: <ErrorRoute></ErrorRoute>
             }
         ]
+    },
+    {
+        path: '*',
+        element: <h1>page not found</h1>
     }
 ])
 

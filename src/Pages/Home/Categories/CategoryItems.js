@@ -9,14 +9,15 @@ import CategoryProduct from './CategoryProduct';
 
 const CategoryItems = () => {
     const category = useLoaderData();
-    const { data: categoryPhone } = useQuery({
-        queryKey: [11111],
+    const { data: categoryPhone, isLoading: isLoading1 } = useQuery({
+        queryKey: [category],
         queryFn: async () => {
             const res = await fetch(`https://assignment-12-server-aknathweb.vercel.app/category/${category}`);
             const data = await res.json();
             return data;
         }
     });
+
     const [bookedInfo, setBookedInfo] = useState({});
     const { loading } = useContext(AuthContext);
     const { data: categoryProducts, isLoading, refetch } = useQuery({
@@ -27,7 +28,7 @@ const CategoryItems = () => {
             return data;
         }
     });
-    if (isLoading || loading) {
+    if (isLoading || loading || isLoading1) {
         return <Loading></Loading>
     }
     const handleBooked = (buyerName, buyerEmail, productId, productImage, productName, price, sellerLocation, sellerMobile) => {
