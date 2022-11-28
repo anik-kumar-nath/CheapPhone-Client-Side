@@ -11,11 +11,9 @@ const Signup = () => {
             userInformation: newUser
         })
             .then((response) => {
-                if (response.statusText === "OK") {
-                    setWaiting(false);
-                    navigate('/', { replace: true })
-                    toast.success('successfully Create Account');
-                }
+                toast.success('successfully Create Account');
+                setWaiting(false);
+                navigate('/', { replace: true })
             });
     }
     const [waiting, setWaiting] = useState(false);

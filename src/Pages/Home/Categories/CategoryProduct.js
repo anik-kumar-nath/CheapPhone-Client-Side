@@ -9,7 +9,7 @@ const CategoryProduct = ({ product, handleBooked, handleReportItem }) => {
     const pathLocation = useLocation();
     const { user } = useContext(AuthContext);
     const [status, setStatus] = useState(null)
-    const { _id, sellerEmail, productImage, productName, originalPrice, resalePrice, yearUse, condition, location, addingDate, description, sellerName, mobile } = product;
+    const { _id, sellerEmail, productImage, productName, originalPrice, resalePrice, yearUse, condition, location, addingDate, description, sellerName, mobile, productStatus } = product;
     fetch(`https://assignment-12-server-aknathweb.vercel.app/sellerstatus?email=${sellerEmail}`)
         .then(res => res.json())
         .then(data => setStatus(data.status))
@@ -19,6 +19,7 @@ const CategoryProduct = ({ product, handleBooked, handleReportItem }) => {
                 <figure><img src={productImage} className='max-h-screen h-96' alt="Shoes" /></figure>
                 <div className="card-body">
                     <h2 className="card-title text-center font-bold">{productName}</h2>
+                    <strong>{productStatus && 'Sold'}</strong>
                     <div className='flex flex-wrap gap-1'>
                         <strong>Original Price:</strong>
                         <span>{originalPrice},</span>
@@ -44,7 +45,9 @@ const CategoryProduct = ({ product, handleBooked, handleReportItem }) => {
                         {status === 'Verified' && <img src={tikMark} alt="" />}
                     </div>
                     <div className='flex flex-wrap gap-1 justify-around' state={{ from: pathLocation }}>
-                        <label htmlFor="my-modal-3" className="btn" onClick={() => { user ? handleBooked(user.displayName, user.email, _id, productImage, productName, resalePrice, location, mobile) : toast.error("To Booked Product you must Login") && navigate('/login', { replace: true }) }}>Book Now</label>
+                        {
+                            !productStatus && <label htmlFor="my-modal-3" className="btn" onClick={() => { user ? handleBooked(user.displayName, user.email, _id, productImage, productName, resalePrice, location, mobile) : toast.error("To Booked Product you must Login") && navigate('/login', { replace: true }) }}>Book Now</label>
+                        }
                         <button className='btn btn-error' onClick={() => { user ? handleReportItem(user.displayName, user.email, _id, productImage, productName) : toast.error("To Report Product you must Login") && navigate('/login', { replace: true }) }}>Report to Admin</button>
                     </div>
                 </div>

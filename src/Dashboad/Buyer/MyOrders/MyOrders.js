@@ -44,7 +44,12 @@ const MyOrders = () => {
                                     <td>{order.productName}</td>
                                     <td>{order.price}</td>
                                     <td>
-                                        <Link to={`/dashboard/payment/${order._id}`} className='btn btn-success btn-sm'>Pay</Link>
+                                        {
+                                            (order.payStatus) ?
+                                                <strong className='text-warning'>Paid</strong>
+                                                :
+                                                <Link to={`/dashboard/payment/${order._id}`} className='btn btn-success btn-sm'>Pay</Link>
+                                        }
                                     </td>
                                 </tr>
                             )

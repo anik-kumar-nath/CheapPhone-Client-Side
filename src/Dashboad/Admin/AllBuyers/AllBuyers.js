@@ -45,7 +45,7 @@ const AllBuyers = () => {
                         <tbody>
                             {
                                 buyers.map((buyer, index) =>
-                                    <tr className="hover">
+                                    <tr className="hover" key={index}>
                                         <th>{index + 1}</th>
                                         <td>{buyer.name}
                                         </td>

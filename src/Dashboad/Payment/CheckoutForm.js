@@ -1,6 +1,7 @@
 // import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useEffect, useState } from 'react';
+import toast from 'react-hot-toast';
 
 const CheckoutForm = ({ booking }) => {
     const [cardError, setCardError] = useState('');
@@ -14,11 +15,11 @@ const CheckoutForm = ({ booking }) => {
     const elements = useElements();
 
     // const { price, email, patient, _id } = booking;
-    const { _id, productId, productImage, productName, price, buyerEmail, buyerName } = booking;
+    const { _id, productId, price, buyerEmail, buyerName } = booking;
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        fetch("http://localhost:5000/create-payment-intent", {
+        fetch("https://assignment-12-server-aknathweb.vercel.app/create-payment-intent", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -42,7 +43,7 @@ const CheckoutForm = ({ booking }) => {
             return;
         }
 
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
+        const { error, /* paymentMethod */ } = await stripe.createPaymentMethod({
             type: 'card',
             card
         });
@@ -62,10 +63,6 @@ const CheckoutForm = ({ booking }) => {
                 payment_method: {
                     card: card,
                     billing_details: {
-                        // productId: productId,
-                        // productName: productName,
-                        // billerName: buyerName,
-                        // billerEmail: buyerEmail
                         name: buyerName,
                         email: buyerEmail
                     },
@@ -80,38 +77,36 @@ const CheckoutForm = ({ booking }) => {
 
         // //////////////////////////////////////
         if (paymentIntent.status === "succeeded") {
-            console.log('card info', card);
-            setSuccess('Congrats! your payment completed');
-            setTransactionId(paymentIntent.id);
+
             // store payment info in the database
 
-            // const payment = {
-            //     price,
-            //     transactionId: paymentIntent.id,
-            //     email,
-            //     bookingId: _id
-            // }
-            // fetch('https://assignment-12-server-aknathweb.vercel.app/payments', {
-            //     method: 'POST',
-            //     headers: {
-            //         'content-type': 'application/json',
-            //         // authorization: `bearer ${localStorage.getItem('accessToken')}`
-            //     },
-            //     body: JSON.stringify(payment)
-            // })
-            //     .then(res => res.json())
-            //     .then(data => {
-            //         console.log(data);
-            //         if (data.insertedId) {
-            //             setSuccess('Congrats! your payment completed');
-            //             setTransactionId(paymentIntent.id);
-            //         }
-            //     })
+            const payment = {
+                transactionId: paymentIntent.id,
+                price,
+                bookingId: _id,
+                productId,
+                buyerEmail,
+            }
+            fetch('https://assignment-12-server-aknathweb.vercel.app/payment', {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json',
+                    // authorization: `bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(payment)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    // console.log(data);
+                    if (data.insertedId) {
+                        toast.success("Congrats! your payment completed");
+                        setSuccess('Congrats! your payment completed');
+                        setTransactionId(paymentIntent.id);
+                    }
+                })
 
         }
         setProcessing(false);
-
-
     }
 
     return (
@@ -136,7 +131,7 @@ const CheckoutForm = ({ booking }) => {
                 <button
                     className='btn btn-sm mt-4 btn-primary'
                     type="submit"
-                    disabled={!stripe || !clientSecret || processing}>
+                    disabled={!stripe || !clientSecret || processing || success}>
                     Pay
                 </button>
             </form>

@@ -9,7 +9,7 @@ const MyProductCard = ({ product, handleProductDelete, handleAdvertise }) => {
                 <div className="card-body">
                     <div className='flex justify-between'>
                         <h2 className="card-title font-bold text-justify">{productName}</h2>
-                        <h2 className={`text-lg p-2 bg-rose-100 rounded-sm ${productStatus === 'Sold' && 'text-yellow-900 font-bold'}`}>{productStatus}</h2>
+                        <h2 className={`text-lg p-2 bg-rose-100 rounded-lg ${productStatus === 'Sold' && 'text-yellow-900 font-extrabold'}`}>{productStatus}</h2>
                     </div>
                     <div className='flex flex-wrap gap-1'>
                         <strong>Original Price:</strong>

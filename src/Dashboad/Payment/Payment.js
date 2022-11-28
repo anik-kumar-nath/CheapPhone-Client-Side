@@ -16,7 +16,7 @@ const Payment = () => {
 
     const navigation = useNavigation();
     // const { treatment, price, appointmentDate, slot } = booking;
-    const { _id, productId, productImage, productName, price, buyerEmail, buyerName } = booking;
+    const { /* _id, productId, */ productImage, productName, price,/*  buyerEmail, buyerName */ } = booking;
 
     if (navigation.state === "loading") {
         return <Loading></Loading>
