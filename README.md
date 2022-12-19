@@ -5,7 +5,7 @@
 A Mobile reselling website that has three categories of different brands and types of phones contain. There have three types of users such as buyer, seller, and admin.
 
 #### Live website:
-https://assignment-12-1fcf4.web.app/
+https://cheap-phone.web.app
 <br/>
 AdminEmail: anik@admin.com
 <br/>
