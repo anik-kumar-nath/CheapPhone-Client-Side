@@ -46,7 +46,7 @@ const CategoryProduct = ({ product, handleBooked, handleReportItem }) => {
                     </div>
                     <div className='flex flex-wrap gap-1 justify-around' state={{ from: pathLocation }}>
                         {
-                            !productStatus && <label htmlFor="my-modal-3" className="btn" onClick={() => { user ? handleBooked(user.displayName, user.email, _id, productImage, productName, resalePrice, location, mobile) : toast.error("To Booked Product you must Login") && navigate('/login', { replace: true }) }}>Book Now</label>
+                            productStatus && <label htmlFor="my-modal-3" className="btn" onClick={() => { user ? handleBooked(user.displayName, user.email, _id, productImage, productName, resalePrice, location, mobile) : toast.error("To Booked Product you must Login") && navigate('/login', { replace: true }) }}>Book Now</label>
                         }
                         <button className='btn btn-error' onClick={() => { user ? handleReportItem(user.displayName, user.email, _id, productImage, productName) : toast.error("To Report Product you must Login") && navigate('/login', { replace: true }) }}>Report to Admin</button>
                     </div>

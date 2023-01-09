@@ -34,7 +34,7 @@ const MyOrders = () => {
                     <tbody>
                         {
                             myorders.map((order, index) =>
-                                <tr className="hover">
+                                <tr key={index} className="hover">
                                     <th>{index + 1}</th>
                                     <td>
                                         <div className="w-12 rounded-full">
